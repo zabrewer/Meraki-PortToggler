@@ -315,7 +315,7 @@ def cli(api_key, serialnumber, switchport, action):
     python PortToggler.py --config api.cfg --serialnumber A1B2C3D4 --switchport 5 --action=disable
 
     * config file should contain one line similar to the following (single quotes required): api_key = '123456789'
-
+    * if you use both --config and --api options, --api will always take precedence over the api key in the file 
     """
     enabled = None
     if action == 'enable':
