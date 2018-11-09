@@ -298,7 +298,7 @@ def cli(api_key, serialnumber, switchport, action):
     API.
 
     The API key can be stored in a file and called with the --config FILEPATH option instead
-    of using the -a or --api-key Options.  API key should be stored in file as follows:
+    of using the -A or --api-key Options.  API key should be stored in file as follows:
     api-key = '[KEY VALUE FROM DASHBOARD]'
 
     THIS SOFTWARE IS PROVIDED AS IS WITH NO WARRANTY OF ANY KIND.  AUTHOR IS NOT RESPONSIBLE 
@@ -314,7 +314,7 @@ def cli(api_key, serialnumber, switchport, action):
 
     python PortToggler.py --config api.cfg --serialnumber A1B2C3D4 --switchport 5 --action=disable
 
-    *config file should contain one line similar to the following (single quotes required): api_key = '123456789'
+    * config file should contain one line similar to the following (single quotes required): api_key = '123456789'
 
     """
     enabled = None
