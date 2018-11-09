@@ -299,7 +299,7 @@ def cli(api_key, serialnumber, switchport, action):
 
     The API key can be stored in a file and called with the --config FILEPATH option instead
     of using the -A or --api-key Options.  API key should be stored in file as follows:
-    api-key = '[KEY VALUE FROM DASHBOARD]'
+    api_key = '[KEY VALUE FROM DASHBOARD]'
 
     THIS SOFTWARE IS PROVIDED AS IS WITH NO WARRANTY OF ANY KIND.  AUTHOR IS NOT RESPONSIBLE 
     FOR ANYTHING, ESPECIALLY IF YOU DISABLE AN UPLINK PORT OR OTHER ACTIVE PORT!
