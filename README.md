@@ -79,7 +79,8 @@ Again, you must have the virtual environment **active** for this to work correct
 Python PortToggler.py --help
 ```
 
-**Other considerations**
+**Other Considerations**
+
 If you wish for PortToggler to be available outside of your virtual environment, you can can call it by using your system default Python3 installation as long as the module dependencies are satisfied.  There are pros and cons to this which I encourage you to explore on your own.
 
 ## Use
