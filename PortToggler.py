@@ -6,7 +6,6 @@ import warnings
 import click
 import click_config_file
 
-#test
 #### setup variables and warning functions ###
 base_url = 'https://api.meraki.com/api/v0'
 
@@ -335,9 +334,7 @@ def cli(api_key, serialnumber, switchport, action):
     * config file should contain one line similar to the following (single quotes required): api_key = '123456789'
     * if you use both --config and --api options, --api will always take precedence over the api key in the file 
     """
-    #enabled = None
-    #portaction = updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = enabled, suppressprint=True)
-    
+        
     if action == 'enable':
          #enabled = True
          #suppressprint = False
