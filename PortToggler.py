@@ -134,7 +134,7 @@ def __returnhandler(statuscode, returntext, objtype, suppressprint):
 
     if str(statuscode) == '200' and validreturn:
         if suppressprint is False:
-            print('{0} Operation Successful - Use --action=status option for verification\n'.format(str(objtype)))
+            print('\n{0} Operation Successful - Use --action=status option for verification\n'.format(str(objtype)))
         return returntext
     elif str(statuscode) == '200':
         if suppressprint is False:
