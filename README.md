@@ -83,13 +83,26 @@ Python PortToggler.py --help
 
 If you wish for PortToggler to be available outside of your virtual environment, you can can call it by using your system default Python3 installation as long as the module dependencies are satisfied.  There are pros and cons to this which I encourage you to explore on your own.
 
-As long as Python 3.5+ is installed (and PIP is installed), you should be able to run PortToggler outside of a virtual environment:
+As long as Python 3.5+ is installed (and PIP is installed), you can run the following commands:
 
 ```
 pip install requests
 pip install click
 pip install click_config_file
 python3 path/to/PortToggler.py --help
+```
+
+If you want PortToggler to be available without having to call Python first, make sure setup.py and PortToggler.py are in the same directory:
+```
+pip install --editable .
+
+```
+
+now you can call PortToggler from the command line by simply typing:
+
+```
+PortToggler
+
 ```
 
 ## Usage
