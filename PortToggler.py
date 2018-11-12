@@ -6,8 +6,6 @@ import warnings
 import click
 import click_config_file
 
-
-#test
 #### setup variables and warning functions ###
 base_url = 'https://api.meraki.com/api/v0'
 
@@ -136,7 +134,7 @@ def __returnhandler(statuscode, returntext, objtype, suppressprint):
 
     if str(statuscode) == '200' and validreturn:
         if suppressprint is False:
-            print('{0} Operation Successful - See returned data for results\n'.format(str(objtype)))
+            print('{0} Operation Successful - Use --action=status option for verification\n'.format(str(objtype)))
         return returntext
     elif str(statuscode) == '200':
         if suppressprint is False:
@@ -196,6 +194,23 @@ def __returnhandler(statuscode, returntext, objtype, suppressprint):
         print('HTTP Status Code: {0} - No returned data\n'.format(str(statuscode)))
 
 ### begin main code ###
+
+# Return a switch port via API
+# https://api.meraki.com/api_docs#return-a-switch-port
+def getswitchportdetail(apikey, serialnum, portnum, suppressprint=False):
+    calltype = 'Switch Port Detail'
+    geturl = '{0}/devices/{1}/switchPorts/{2}'.format(str(base_url), str(serialnum), str(portnum))
+    headers = {
+        'x-cisco-meraki-api-key': format(str(apikey)),
+        'Content-Type': 'application/json'
+    }
+    dashboard = requests.get(geturl, headers=headers)
+    #
+    # Call return handler function to parse Dashboard response
+    #
+    result = __returnhandler(dashboard.status_code, dashboard.text, calltype, suppressprint)
+    return result
+
 
 # Update a switch port via API
 # https://api.meraki.com/api_docs#update-a-switch-port
@@ -286,7 +301,7 @@ def updateswitchport(apikey, serialnum, portnum, name=None, tags=None, enabled=N
 ## passes API key from config to CLI, config file should contain apikey = "[key value]"
 @click_config_file.configuration_option()
 @click.option('--serialnumber', '-SN', type=str, help='Serial Number of the Switch', required=True)
-@click.option('--action', type=click.Choice(['enable', 'disable']), required=True)
+@click.option('--action', type=click.Choice(['enable', 'disable','status']), required=True)
 @click.option(
     '--switchport', '-SP', type=str,
     help='SwitchPort to Enable/Disable', required=True
@@ -319,14 +334,29 @@ def cli(api_key, serialnumber, switchport, action):
     * config file should contain one line similar to the following (single quotes required): api_key = '123456789'
     * if you use both --config and --api options, --api will always take precedence over the api key in the file 
     """
-    enabled = None
+    #enabled = None
+    #portaction = updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = enabled, suppressprint=True)
+    
     if action == 'enable':
-         enabled = True
+         #enabled = True
+         #suppressprint = False
+         updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = True)
     elif action == 'disable':
-         enabled = False
+         #enabled = False
+         #suppressprint = False
          click.confirm('Are you sure you want to disable port number ' + switchport + '?', abort=True)
-     
-    portaction = updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = enabled)
+         updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = False)
+    elif action == 'status':
+        detail = getswitchportdetail(apikey = api_key, serialnum = serialnumber, portnum = switchport)
+        if (detail["enabled"]) == True:
+            click.echo('Port number ' + switchport +' is ' + 'enabled, see details below:\n')
+        elif (detail["enabled"]) == False:
+            click.echo('Port number ' + switchport +' is ' + 'disabled, see details below:\n')
+        for key, value in detail.items():
+            print(key, '=', value)
+        quit
+    
+    print('\n')
 
 if __name__ == "__main__":
     cli()
