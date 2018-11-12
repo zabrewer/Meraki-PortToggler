@@ -1,2 +1,2 @@
-* add option to get port status (will likely have to flatten JSON and/or use dictionary/list to hold JSON and specficially report port status)
+* [COMPLETE] add option to get port status (will likely have to flatten JSON and/or use dictionary/list to hold JSON and specficially report port status)
 * clean up functions/classes and general PEP8 cleanup
