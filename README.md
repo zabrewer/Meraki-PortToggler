@@ -83,6 +83,15 @@ Python PortToggler.py --help
 
 If you wish for PortToggler to be available outside of your virtual environment, you can can call it by using your system default Python3 installation as long as the module dependencies are satisfied.  There are pros and cons to this which I encourage you to explore on your own.
 
+As long as Python 3.5+ is installed (and PIP is installed), you should be able to run PortToggler outside of a virtual environment:
+
+```
+pip install requests
+pip install click
+pip install click_config_file
+python3 path/to/PortToggler.py --help
+```
+
 ## Usage
 Invoke PortToggler.py --help to get started.  You need an API key, the switch's serial number, and the switch port.
 
