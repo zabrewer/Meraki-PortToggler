@@ -6,7 +6,7 @@ import warnings
 import click
 import click_config_file
 
-#### setup variables and warning functions ###
+#### setup baseURL for API call functions ###
 base_url = 'https://api.meraki.com/api/v0'
 
 #### Error trapping ###
