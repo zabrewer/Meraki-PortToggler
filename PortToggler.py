@@ -336,12 +336,8 @@ def cli(api_key, serialnumber, switchport, action):
     """
         
     if action == 'enable':
-         #enabled = True
-         #suppressprint = False
          updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = True)
     elif action == 'disable':
-         #enabled = False
-         #suppressprint = False
          click.confirm('Are you sure you want to disable port number ' + switchport + '?', abort=True)
          updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = False)
     elif action == 'status':

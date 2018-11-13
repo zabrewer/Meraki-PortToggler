@@ -108,6 +108,8 @@ PortToggler
 ## Usage
 Invoke PortToggler.py --help to get started.  You need an API key, the switch's serial number, and the switch port.
 
+Main potins are --action=disable|enable|status
+
 Examples:
 
     python PortToggler.py --api-key 123456789 --serialnumber A1B2C3D4 --switchport 5 --action=disable
