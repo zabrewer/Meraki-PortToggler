@@ -336,21 +336,24 @@ def cli(api_key, serialnumber, switchport, action):
     """
         
     if action == 'enable':
-         updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = True)
+        updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = True)
     elif action == 'disable':
-         click.confirm('Are you sure you want to disable port number ' + switchport + '?', abort=True)
-         updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = False)
+        click.confirm('Are you sure you want to disable port number ' + switchport + '?', abort=True)
+        updateswitchport(apikey = api_key, serialnum = serialnumber, portnum = switchport, enabled = False)
     elif action == 'status':
         detail = getswitchportdetail(apikey = api_key, serialnum = serialnumber, portnum = switchport)
-        if (detail["enabled"]) == True:
+        if detail is not None and detail["enabled"]:
             click.echo('Port number ' + switchport +' is ' + 'enabled, see details below:\n')
-        elif (detail["enabled"]) == False:
+            for key, value in detail.items():
+                print(key, '=', value)
+        elif detail is not None and detail["enabled"] == False:
             click.echo('Port number ' + switchport +' is ' + 'disabled, see details below:\n')
-        for key, value in detail.items():
-            print(key, '=', value)
-        quit
+            for key, value in detail.items():
+                print(key, '=', value)
+        else:
+            click.echo('NO DATA RETURNED.  MAKE SURE YOUR API KEY IS GENERATED ON THE MERAKI DASHBOARD! \n' +
+            'ALSO CHECK CLI FOR TYPOS IN VALUES:  API KEY, SWITCH SN, ETC!!')
     
     print('\n')
-
 if __name__ == "__main__":
     cli()
