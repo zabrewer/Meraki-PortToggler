@@ -95,14 +95,12 @@ python3 path/to/PortToggler.py --help
 If you want PortToggler to be available without having to call Python first, make sure setup.py and PortToggler.py are in the same directory:
 ```
 pip install --editable .
-
 ```
 
 now you can call PortToggler from the command line by simply typing:
 
 ```
 PortToggler
-
 ```
 
 ## Usage
