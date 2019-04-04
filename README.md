@@ -2,14 +2,14 @@
 Python 3.5+ command line utility to enable/disable Meraki switch ports via the API.
 
 ## Purpose
-I ran into a use case where Meraki stacking ports had to be temporarily disabled.
+I ran into a use case where Meraki stacking ports had to be temporarily disabled on Meraki MS switches being deployed at multiple sites.
 
 As stack ports can only be disabled via the Meraki API,  I created this tool (and compiled it) to assist on-site installers stacking ports on new installs and then re-enable the stacking ports at a later date.
 
-It can also be used to toggle any switchport via the API.
+It can also be used to toggle any switchport via the API and check the status.
 
 ## Installation
-PortToggler was tested/written on Python 3.7 but should work on 3.5+ and possibly earlier.  It requires the following Python modules:
+PortToggler was tested/written on Python 3.7 but should work on 3.5+.  It requires the following Python modules:
 * requests
 * click
 * click_config_file
