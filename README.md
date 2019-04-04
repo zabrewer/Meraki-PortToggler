@@ -2,9 +2,9 @@
 Python 3.5+ command line utility to enable/disable Meraki switch ports via the API.
 
 ## Purpose
-My customer is installing Meraki switches and we discovered that when enabled, port isolation doesn't work when a stacking port is active.  To prevent truck rolls, the customer is asking their implementation partner to install stacking cables but disable the stack ports.
+I ran into a use case where Meraki stacking ports had to be temporarily disabled.
 
-Stack ports can only be disabled/enabled via the Meraki API.  The idea is to use this tool to disable stacking ports on new installs and then re-enable the stacking ports when a resolution is available from Meraki (without someone physically re-installing the stacking cables).
+As stack ports can only be disabled via the Meraki API,  I created this tool (and compiled it) to assist on-site installers stacking ports on new installs and then re-enable the stacking ports at a later date.
 
 It can also be used to toggle any switchport via the API.
 
