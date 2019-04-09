@@ -1,7 +1,5 @@
-from __future__ import print_function
 import requests
 import json
-import re
 import warnings
 import click
 import click_config_file
@@ -18,22 +16,6 @@ class Error(Exception):
     """
     pass
 
-class ListLengthWarn(Warning):
-    """
-
-    Thrown when list lengths do not match
-
-    """
-    pass
-
-class IgnoredArgument(Warning):
-    """
-
-    Thrown when argument will be ignored
-
-    """
-    pass
-
 class OrgPermissionError(Error):
     """
 
@@ -46,15 +28,6 @@ class OrgPermissionError(Error):
 
     def __str__(self):
         return repr(self.default)
-
-class ListError(Error):
-    """
-
-    Raised when empty list is passed when required
-
-    """
-    def __init__(self, message):
-        self.message = message
 
 class DashboardObject(object):
     """
@@ -81,27 +54,6 @@ def __isjson(myjson):
     return True
 
 ### more handler functions ### 
-
-def __listtotag(taglist):
-    """
-
-    Args:
-        taglist: Space separated list of tags in a single string
-
-    Returns: List type variable containing all tags
-
-    """
-
-    liststr = '  '
-
-    if not isinstance(taglist, list):
-        taglist = list(taglist)
-
-    for t in taglist:
-        liststr = liststr + t + '  '
-
-    return liststr
-
 
 def __returnhandler(statuscode, returntext, objtype, suppressprint):
     """
@@ -213,6 +165,8 @@ def getswitchportdetail(apikey, serialnum, portnum, suppressprint=False):
 
 
 # Update a switch port via API
+# leaving a lot of this here even though it is not accessible via the CLI [zb]
+# as it is written now in case this tool needs to be updated for more use cases [zb]
 # https://api.meraki.com/api_docs#update-a-switch-port
 def updateswitchport(apikey, serialnum, portnum, name=None, tags=None, enabled=None, porttype=None, vlan=None, voicevlan=None, allowedvlans=None, poe=None, isolation=None, rstp=None, stpguard=None, accesspolicynum=None, suppressprint=False):
 
@@ -351,9 +305,12 @@ def cli(api_key, serialnumber, switchport, action):
             for key, value in detail.items():
                 print(key, '=', value)
         else:
-            click.echo('NO DATA RETURNED.  MAKE SURE YOUR API KEY IS GENERATED ON THE MERAKI DASHBOARD! \n' +
-            'ALSO CHECK CLI FOR TYPOS IN VALUES:  API KEY, SWITCH SN, ETC!!')
-    
+            click.echo('\nNO DATA RETURNED. \n\n' +
+            '**Check the following:** \n\n' +
+            '- Is the API key generated on dashboard? \n' +
+            '- Are there typos in switch SN or other attributes? \n' +
+            '- Does API key have access to the switch org (org admins) or network (network admins)?'
+            )
     print('\n')
 if __name__ == "__main__":
     cli()
