@@ -124,4 +124,8 @@ Examples:
 ## Credit
 Credit to Shiyue Cheng for error functions, saved me much time while I wrote this on a flight from SJC.
 
+## License
+
+This project is licensed to you under the terms of the [Cisco Sample
+Code License](./LICENSE).
 
